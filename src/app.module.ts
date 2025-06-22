@@ -1,13 +1,20 @@
-import { Module } from '@nestjs/common';
+import { Module, OnModuleInit } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
 import { DatabaseModule } from './database/database.module';
 import { MoviesModule } from './modules/movies/movies.module';
+import { CsvService } from './modules/movies/services/csv.service';
 
 @Module({
   imports: [DatabaseModule, MoviesModule],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule implements OnModuleInit {
+  constructor(private readonly csvService: CsvService) {}
+
+  async onModuleInit() {
+    await this.csvService.loadMoviesFromCsv();
+  }
+}
