@@ -1,0 +1,21 @@
+services:
+  outsera-api:
+    build: .
+    container_name: outsera-api-dev
+    ports:
+      - "3000:3000"
+    volumes:
+      # Volume para código fonte (hot reload)
+      - .:/app
+      # Volume para node_modules (evita conflitos)
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+      - PORT=3000
+    restart: unless-stopped
+    networks:
+      - outsera-network
+
+networks:
+  outsera-network:
+    driver: bridge 
