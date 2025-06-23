@@ -5,9 +5,10 @@ import { AppService } from './app.service';
 import { DatabaseModule } from './database/database.module';
 import { MoviesModule } from './modules/movies/movies.module';
 import { CsvService } from './modules/movies/services/csv.service';
+import { ProducersModule } from './modules/producers/producers.module';
 
 @Module({
-  imports: [DatabaseModule, MoviesModule],
+  imports: [DatabaseModule, MoviesModule, ProducersModule],
   controllers: [AppController],
   providers: [AppService],
 })
