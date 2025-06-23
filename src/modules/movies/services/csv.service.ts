@@ -29,7 +29,6 @@ export class CsvService {
     const existingMovies = await this.movieRepository.find();
 
     if (existingMovies.length > 0) {
-      console.log(`${existingMovies.length} movies already saved`); // Caso o banco de dados já estiver populado, retorna os filmes já salvos
       return existingMovies;
     }
 
@@ -48,8 +47,6 @@ export class CsvService {
 
           try {
             await this.saveMovies(movies);
-            console.log(`${movies.length} movies saved successfully`);
-
             resolve(movies);
           } catch (error) {
             reject(error);
